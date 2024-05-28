@@ -1,0 +1,241 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="10dp"
+    android:elevation="4dp"
+    app:cardCornerRadius="8dp"
+    android:background="?attr/selectableItemBackground"
+    tools:showIn="@layout/activity_parts_list">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="16dp">
+
+        <!-- TextView for ID -->
+        <TextView
+            android:id="@+id/textLayoutIdPartList"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="ID:"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:textColor="@color/secundary"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/textIdPartList"
+            app:layout_constraintHorizontal_chainStyle="packed" />
+
+        <TextView
+            android:id="@+id/textIdPartList"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="12345"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:textColor="@color/black"
+            app:layout_constraintStart_toEndOf="@+id/textLayoutIdPartList"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_chainStyle="packed" />
+
+        <!-- TextView for Nº Ordem Serviço -->
+        <TextView
+            android:id="@+id/textLayoutOrderNumber"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Nº Ordem Serviço:"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:textColor="@color/secundary"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textLayoutIdPartList"
+            app:layout_constraintEnd_toStartOf="@+id/textOrderNumberPartList"
+            app:layout_constraintHorizontal_chainStyle="packed" />
+
+        <TextView
+            android:id="@+id/textOrderNumberPartList"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="67890"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:textColor="@color/black"
+            app:layout_constraintStart_toEndOf="@+id/textLayoutOrderNumber"
+            app:layout_constraintTop_toBottomOf="@+id/textIdPartList"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_chainStyle="packed" />
+
+        <!-- TextView for Quantidade -->
+        <TextView
+            android:id="@+id/textLayoutQtyPartList"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Quantidade:"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:textColor="@color/secundary"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textLayoutOrderNumber"
+            app:layout_constraintEnd_toStartOf="@+id/textQtyPartList"
+            app:layout_constraintHorizontal_chainStyle="packed" />
+
+        <TextView
+            android:id="@+id/textQtyPartList"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="10"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:textColor="@android:color/black"
+            app:layout_constraintStart_toEndOf="@+id/textLayoutQtyPartList"
+            app:layout_constraintTop_toBottomOf="@+id/textOrderNumberPartList"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_chainStyle="packed" />
+
+        <!-- TextView for Codigo -->
+        <TextView
+            android:id="@+id/textLayoutCodigoPartList"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Codigo:"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:textColor="@color/secundary"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textLayoutQtyPartList"
+            app:layout_constraintEnd_toStartOf="@+id/textCodigoPartList"
+            app:layout_constraintHorizontal_chainStyle="packed" />
+
+        <TextView
+            android:id="@+id/textCodigoPartList"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="XYZ123"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:textColor="@android:color/black"
+            app:layout_constraintStart_toEndOf="@+id/textLayoutCodigoPartList"
+            app:layout_constraintTop_toBottomOf="@+id/textQtyPartList"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_chainStyle="packed" />
+
+        <!-- TextView for Descrição -->
+        <TextView
+            android:id="@+id/textLayoutDescricaoPartList"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Descrição:"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:textColor="@color/secundary"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textLayoutCodigoPartList"
+            app:layout_constraintEnd_toStartOf="@+id/textDescricaoPartList"
+            app:layout_constraintHorizontal_chainStyle="packed" />
+
+        <TextView
+            android:id="@+id/textDescricaoPartList"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Descrição do item"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:textColor="@android:color/black"
+            app:layout_constraintStart_toEndOf="@+id/textLayoutDescricaoPartList"
+            app:layout_constraintTop_toBottomOf="@+id/textCodigoPartList"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_chainStyle="packed" />
+
+        <!-- TextView for Valor -->
+        <TextView
+            android:id="@+id/textLayoutValorPartList"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Valor:"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:textColor="@color/secundary"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textLayoutDescricaoPartList"
+            app:layout_constraintEnd_toStartOf="@+id/textValorPartList"
+            app:layout_constraintHorizontal_chainStyle="packed" />
+
+        <TextView
+            android:id="@+id/textValorPartList"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="100.00"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:textColor="@android:color/black"
+            app:layout_constraintStart_toEndOf="@+id/textLayoutValorPartList"
+            app:layout_constraintTop_toBottomOf="@+id/textDescricaoPartList"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_chainStyle="packed" />
+
+        <!-- TextView for Total -->
+        <TextView
+            android:id="@+id/textLayoutTotalPartList"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Total:"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:textColor="@color/secundary"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textLayoutValorPartList"
+            app:layout_constraintEnd_toStartOf="@+id/textTotalPartList"
+            app:layout_constraintHorizontal_chainStyle="packed" />
+
+        <TextView
+            android:id="@+id/textTotalPartList"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="1000.00"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:textColor="@android:color/black"
+            app:layout_constraintStart_toEndOf="@+id/textLayoutTotalPartList"
+            app:layout_constraintTop_toBottomOf="@+id/textValorPartList"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_chainStyle="packed" />
+
+        <!-- Icons for Edit and Delete -->
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="end"
+            app:layout_constraintTop_toBottomOf="@+id/textTotalPartList"
+            app:layout_constraintEnd_toEndOf="parent">
+
+            <ImageButton
+                android:id="@+id/editButtonPartList"
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:layout_margin="4dp"
+                android:src="@drawable/baseline_edit_note_24"
+                android:background="?attr/selectableItemBackground"
+                android:contentDescription="Edit"
+                android:scaleType="centerInside"
+                android:padding="4dp" />
+
+            <ImageButton
+                android:id="@+id/deleteButtonPartList"
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:layout_margin="4dp"
+                android:src="@drawable/baseline_delete_24"
+                android:background="?attr/selectableItemBackground"
+                android:contentDescription="Delete"
+                android:scaleType="centerInside"
+                android:padding="4dp" />
+        </LinearLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.cardview.widget.CardView>

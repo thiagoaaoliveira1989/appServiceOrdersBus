@@ -1,0 +1,343 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="10dp"
+    android:elevation="4dp"
+    app:cardCornerRadius="8dp"
+    android:background="?attr/selectableItemBackground"
+    tools:showIn="@layout/activity_serviceorders_list">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="16dp">
+
+        <!-- TextView for ID -->
+        <TextView
+            android:id="@+id/textLayoutIdOrder"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="ID:"
+            android:textColor="@color/secundary"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toStartOf="@+id/textIdOrder"
+            app:layout_constraintHorizontal_chainStyle="packed"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/textIdOrder"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="12345"
+            android:textColor="@color/black"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_chainStyle="packed"
+            app:layout_constraintStart_toEndOf="@+id/textLayoutIdOrder"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <!-- TextView for Order Number -->
+        <TextView
+            android:id="@+id/textLayoutOrderNumber"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Nº Ordem Serviço:"
+            android:textColor="@color/secundary"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toStartOf="@+id/textOrderNumber"
+            app:layout_constraintHorizontal_chainStyle="packed"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textLayoutIdOrder" />
+
+        <TextView
+            android:id="@+id/textOrderNumber"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="67890"
+            android:textColor="@color/black"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_chainStyle="packed"
+            app:layout_constraintStart_toEndOf="@+id/textLayoutOrderNumber"
+            app:layout_constraintTop_toBottomOf="@+id/textIdOrder" />
+
+        <!-- TextView for Km Bus -->
+        <TextView
+            android:id="@+id/textLayoutKmBus"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Km Ônibus:"
+            android:textColor="@color/secundary"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toStartOf="@+id/textKmBus"
+            app:layout_constraintHorizontal_chainStyle="packed"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textLayoutOrderNumber" />
+
+        <TextView
+            android:id="@+id/textKmBus"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="50000"
+            android:textColor="@color/black"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_chainStyle="packed"
+            app:layout_constraintStart_toEndOf="@+id/textLayoutKmBus"
+            app:layout_constraintTop_toBottomOf="@+id/textOrderNumber" />
+
+        <!-- TextView for Start Date -->
+        <TextView
+            android:id="@+id/textLayoutStartDate"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Data Início:"
+            android:textColor="@color/secundary"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toStartOf="@+id/textStartDate"
+            app:layout_constraintHorizontal_chainStyle="packed"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textLayoutKmBus" />
+
+        <TextView
+            android:id="@+id/textStartDate"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="01/01/2024"
+            android:textColor="@color/black"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_chainStyle="packed"
+            app:layout_constraintStart_toEndOf="@+id/textLayoutStartDate"
+            app:layout_constraintTop_toBottomOf="@+id/textKmBus" />
+
+        <!-- TextView for End Date -->
+        <TextView
+            android:id="@+id/textLayoutEndDate"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Data Fim:"
+            android:textColor="@color/secundary"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toStartOf="@+id/textEndDate"
+            app:layout_constraintHorizontal_chainStyle="packed"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textLayoutStartDate" />
+
+        <TextView
+            android:id="@+id/textEndDate"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="02/01/2024"
+            android:textColor="@color/black"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_chainStyle="packed"
+            app:layout_constraintStart_toEndOf="@+id/textLayoutEndDate"
+            app:layout_constraintTop_toBottomOf="@+id/textStartDate" />
+
+        <!-- TextView for Description -->
+        <TextView
+            android:id="@+id/textLayoutDescription"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Descrição:"
+            android:textColor="@color/secundary"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toStartOf="@+id/textDescription"
+            app:layout_constraintHorizontal_chainStyle="packed"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textLayoutEndDate" />
+
+        <TextView
+            android:id="@+id/textDescription"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Manutenção preventiva"
+            android:textColor="@color/black"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_chainStyle="packed"
+            app:layout_constraintStart_toEndOf="@+id/textLayoutDescription"
+            app:layout_constraintTop_toBottomOf="@+id/textEndDate" />
+
+        <!-- TextView for Mechanic -->
+        <TextView
+            android:id="@+id/textLayoutMechanic"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Mecânico:"
+            android:textColor="@color/secundary"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toStartOf="@+id/textMechanic"
+            app:layout_constraintHorizontal_chainStyle="packed"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textLayoutDescription" />
+
+        <TextView
+            android:id="@+id/textMechanic"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="João Silva"
+            android:textColor="@color/black"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_chainStyle="packed"
+            app:layout_constraintStart_toEndOf="@+id/textLayoutMechanic"
+            app:layout_constraintTop_toBottomOf="@+id/textDescription" />
+
+        <!-- TextView for Supervisor -->
+        <TextView
+            android:id="@+id/textLayoutSupervisor"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Supervisor:"
+            android:textColor="@color/secundary"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toStartOf="@+id/textSupervisor"
+            app:layout_constraintHorizontal_chainStyle="packed"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textLayoutMechanic" />
+
+        <TextView
+            android:id="@+id/textSupervisor"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Carlos Souza"
+            android:textColor="@color/black"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_chainStyle="packed"
+            app:layout_constraintStart_toEndOf="@+id/textLayoutSupervisor"
+            app:layout_constraintTop_toBottomOf="@+id/textMechanic" />
+
+        <!-- TextView for Vehicle -->
+        <TextView
+            android:id="@+id/textLayoutVehicle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Veículo:"
+            android:textColor="@color/secundary"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toStartOf="@+id/textVehicle"
+            app:layout_constraintHorizontal_chainStyle="packed"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textLayoutSupervisor" />
+
+        <TextView
+            android:id="@+id/textVehicle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Ônibus XYZ"
+            android:textColor="@color/black"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_chainStyle="packed"
+            app:layout_constraintStart_toEndOf="@+id/textLayoutVehicle"
+            app:layout_constraintTop_toBottomOf="@+id/textSupervisor" />
+
+        <!-- TextView for License Plate -->
+        <TextView
+            android:id="@+id/textLayoutLicensePlate"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Placa:"
+            android:textColor="@color/secundary"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toStartOf="@+id/textLicensePlate"
+            app:layout_constraintHorizontal_chainStyle="packed"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textLayoutVehicle" />
+
+        <TextView
+            android:id="@+id/textLicensePlate"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="ABC-1234"
+            android:textColor="@color/black"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_chainStyle="packed"
+            app:layout_constraintStart_toEndOf="@+id/textLayoutLicensePlate"
+            app:layout_constraintTop_toBottomOf="@+id/textVehicle" />
+
+
+        <!-- Icons for Edit and Delete -->
+        <LinearLayout
+            android:id="@+id/linearLayout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:gravity="end"
+            android:orientation="horizontal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/textLicensePlate">
+
+            <ImageButton
+                android:id="@+id/editButtonOrder"
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:layout_margin="4dp"
+                android:background="?attr/selectableItemBackground"
+                android:contentDescription="Edit"
+                android:padding="4dp"
+                android:scaleType="centerInside"
+                android:src="@drawable/baseline_edit_note_24" />
+
+            <ImageButton
+                android:id="@+id/deleteButtonOrder"
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:layout_margin="4dp"
+                android:background="?attr/selectableItemBackground"
+                android:contentDescription="Delete"
+                android:padding="4dp"
+                android:scaleType="centerInside"
+                android:src="@drawable/baseline_delete_24" />
+        </LinearLayout>
+
+        <ImageButton
+            android:id="@+id/btnPdfButton"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="188dp"
+            android:background="@drawable/baseline_local_printshop_24"
+            android:contentDescription="Generate PDF"
+            app:layout_constraintBottom_toBottomOf="@id/editButtonOrder"
+            app:layout_constraintEnd_toStartOf="@+id/linearLayout"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/textLicensePlate"
+            app:layout_constraintVertical_bias="1.0"
+            app:tint="@color/black"
+            tools:ignore="NotSibling" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.cardview.widget.CardView>

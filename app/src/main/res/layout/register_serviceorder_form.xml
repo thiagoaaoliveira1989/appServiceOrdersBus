@@ -1,0 +1,207 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/fundoDark"
+    android:padding="10dp"
+    android:scrollbarAlwaysDrawHorizontalTrack="true"
+    android:scrollbarAlwaysDrawVerticalTrack="true"
+    tools:context=".views.serviceOrder.RegisterServiceOrderActivity">
+
+    <View
+        android:id="@+id/containerRegisterServiceOrder"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginHorizontal="5dp"
+        android:background="@drawable/container_login"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.9"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.498"
+        tools:ignore="MissingConstraints" />
+
+    <TextView
+        android:id="@+id/txtBusInfo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:text="Cadastrar Ordem de Serviço"
+        android:textColor="@color/black"
+        android:textSize="25sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="@id/containerRegisterServiceOrder"
+        app:layout_constraintStart_toStartOf="@id/containerRegisterServiceOrder"
+        app:layout_constraintTop_toTopOf="@+id/containerRegisterServiceOrder" />
+
+
+    <com.google.android.material.textfield.TextInputEditText
+        android:id="@+id/edtNumberServiceOrder"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="40dp"
+        android:layout_marginVertical="10dp"
+        android:layout_marginTop="32dp"
+        android:autoText="false"
+        android:background="@drawable/container_edit_text_login"
+        android:hint="Nº da Ordem de Serviço"
+        android:inputType="text"
+        android:maxLines="1"
+        android:padding="15dp"
+        app:layout_constraintEnd_toEndOf="@+id/containerRegisterServiceOrder"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="@+id/containerRegisterServiceOrder"
+        app:layout_constraintTop_toBottomOf="@+id/txtBusInfo" />
+
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/menuDropVeiculoServiceOrder"
+        style="@style/Widget.Material3.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="40dp"
+        android:layout_marginVertical="10dp"
+        android:layout_marginTop="56dp"
+        app:layout_constraintEnd_toEndOf="@+id/containerRegisterServiceOrder"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="@+id/containerRegisterServiceOrder"
+        app:layout_constraintTop_toBottomOf="@+id/edtNumberServiceOrder">
+
+        <com.google.android.material.textfield.MaterialAutoCompleteTextView
+            android:id="@+id/selectVehicleTypeServiceOrder"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Selecione o veículo"
+            android:padding="15dp" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+
+    <EditText
+        android:id="@+id/edtKm"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="40dp"
+        android:layout_marginVertical="10dp"
+        android:layout_marginTop="56dp"
+        android:background="@drawable/container_edit_text_login"
+        android:hint="KM do Veículo"
+        android:inputType="text"
+        android:maxLines="1"
+        android:padding="15dp"
+        app:layout_constraintEnd_toEndOf="@+id/containerRegisterServiceOrder"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="@+id/containerRegisterServiceOrder"
+        app:layout_constraintTop_toBottomOf="@+id/menuDropVeiculoServiceOrder" />
+
+    <EditText
+        android:id="@+id/edtStartDate"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="40dp"
+        android:layout_marginVertical="10dp"
+        android:layout_marginTop="56dp"
+        android:background="@drawable/container_edit_text_login"
+        android:hint="Data de Abertura dd-mm-aaaa"
+        android:inputType="text"
+        android:maxLines="1"
+        android:padding="15dp"
+        app:layout_constraintEnd_toEndOf="@+id/containerRegisterServiceOrder"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="@+id/containerRegisterServiceOrder"
+        app:layout_constraintTop_toBottomOf="@+id/edtKm" />
+
+    <EditText
+        android:id="@+id/edtEndDate"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="40dp"
+        android:layout_marginVertical="10dp"
+        android:layout_marginTop="56dp"
+        android:background="@drawable/container_edit_text_login"
+        android:hint="Data de Fechamento dd-mm-aaaa"
+        android:inputType="text"
+        android:maxLines="1"
+        android:padding="15dp"
+        app:layout_constraintEnd_toEndOf="@+id/containerRegisterServiceOrder"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="@+id/containerRegisterServiceOrder"
+        app:layout_constraintTop_toBottomOf="@+id/edtStartDate" />
+
+    <EditText
+        android:id="@+id/edtDescriptionServiceOrder"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="40dp"
+        android:layout_marginVertical="10dp"
+        android:layout_marginTop="56dp"
+        android:background="@drawable/container_edit_text_login"
+        android:hint="Descrição"
+        android:inputType="text"
+        android:maxLines="10"
+        android:padding="15dp"
+        app:layout_constraintEnd_toEndOf="@+id/containerRegisterServiceOrder"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="@+id/containerRegisterServiceOrder"
+        app:layout_constraintTop_toBottomOf="@+id/edtEndDate" />
+
+    <EditText
+        android:id="@+id/edtMechanic"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="40dp"
+        android:layout_marginVertical="10dp"
+        android:layout_marginTop="56dp"
+        android:background="@drawable/container_edit_text_login"
+        android:hint="Mecanico"
+        android:inputType="text"
+        android:maxLines="1"
+        android:padding="15dp"
+        app:layout_constraintEnd_toEndOf="@+id/containerRegisterServiceOrder"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="@+id/containerRegisterServiceOrder"
+        app:layout_constraintTop_toBottomOf="@+id/edtDescriptionServiceOrder" />
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/menuDropSupervisorServiceOrder"
+        style="@style/Widget.Material3.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="40dp"
+        android:layout_marginVertical="10dp"
+        android:layout_marginTop="16dp"
+        app:layout_constraintEnd_toEndOf="@+id/containerRegisterServiceOrder"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="@+id/containerRegisterServiceOrder"
+        app:layout_constraintTop_toBottomOf="@+id/edtMechanic">
+
+        <com.google.android.material.textfield.MaterialAutoCompleteTextView
+            android:id="@+id/selectSupervisor"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Selecione o Supervisor"
+            android:padding="15dp" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+
+    <Button
+        android:id="@+id/btnRegisterServiceOrder"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="20dp"
+        android:layout_marginTop="24dp"
+        android:text="Cadastrar"
+        android:textColor="@color/white"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="@+id/containerRegisterServiceOrder"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="@+id/containerRegisterServiceOrder"
+        app:layout_constraintTop_toBottomOf="@+id/menuDropSupervisorServiceOrder" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+

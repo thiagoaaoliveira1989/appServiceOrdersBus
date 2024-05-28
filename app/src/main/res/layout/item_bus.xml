@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- CardView principal que envolve os TextViews -->
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="10dp"
+    android:elevation="4dp"
+    app:cardCornerRadius="8dp"
+    android:background="?attr/selectableItemBackground"
+    tools:showIn="@layout/activity_bus_list">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="16dp">
+
+        <!-- TextView for ID -->
+        <TextView
+            android:id="@+id/textLayoutId"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="ID:"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:textColor="@color/secundary"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/textId"
+            app:layout_constraintHorizontal_chainStyle="packed" />
+
+        <TextView
+            android:id="@+id/textId"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="12345"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:textColor="@color/black"
+            app:layout_constraintStart_toEndOf="@+id/textLayoutId"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_chainStyle="packed" />
+
+        <!-- TextView for PLACA -->
+        <TextView
+            android:id="@+id/textLayoutPlaca"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="PLACA:"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:textColor="@color/secundary"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textLayoutId"
+            app:layout_constraintEnd_toStartOf="@+id/textPlaca"
+            app:layout_constraintHorizontal_chainStyle="packed" />
+
+        <TextView
+            android:id="@+id/textPlaca"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="12345"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:textColor="@color/black"
+            app:layout_constraintStart_toEndOf="@+id/textLayoutPlaca"
+            app:layout_constraintTop_toBottomOf="@+id/textId"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_chainStyle="packed" />
+
+        <!-- TextView for Tipo de Veiculo -->
+        <TextView
+            android:id="@+id/textLayoutTipoVeiculo"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="TIPO DE VEÍCULO:"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:textColor="@color/secundary"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textLayoutPlaca"
+            app:layout_constraintEnd_toStartOf="@+id/textTipoVeiculo"
+            app:layout_constraintHorizontal_chainStyle="packed" />
+
+        <TextView
+            android:id="@+id/textTipoVeiculo"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Carro"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:textColor="@color/black"
+            app:layout_constraintStart_toEndOf="@+id/textLayoutTipoVeiculo"
+            app:layout_constraintTop_toBottomOf="@+id/textPlaca"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_chainStyle="packed" />
+
+        <!-- Icons for Edit and Delete -->
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="end"
+            app:layout_constraintTop_toBottomOf="@id/textTipoVeiculo"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="16dp">
+
+            <ImageButton
+                android:id="@+id/editButtonOrder"
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:layout_margin="4dp"
+                android:src="@drawable/baseline_edit_note_24"
+                android:background="?attr/selectableItemBackground"
+                android:contentDescription="Edit"
+                android:scaleType="centerInside"
+                android:padding="4dp" />
+
+            <ImageButton
+                android:id="@+id/deleteButtonOrder"
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:layout_margin="4dp"
+                android:src="@drawable/baseline_delete_24"
+                android:background="?attr/selectableItemBackground"
+                android:contentDescription="Delete"
+                android:scaleType="centerInside"
+                android:padding="4dp" />
+        </LinearLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.cardview.widget.CardView>

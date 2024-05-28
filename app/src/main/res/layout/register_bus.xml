@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/fundoDark"
+    tools:context=".views.bus.RegisterBusActivity">
+
+    <View
+        android:id="@+id/containerRegisterBus"
+        android:layout_width="match_parent"
+        android:layout_height="400dp"
+        android:layout_marginHorizontal="20dp"
+        android:background="@drawable/container_login"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.9"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.498"
+        tools:ignore="MissingConstraints" />
+
+    <TextView
+        android:id="@+id/txtBusInfo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:text="Cadastrar Ônibus"
+        android:textColor="@color/black"
+        android:textSize="25sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="@id/containerRegisterBus"
+        app:layout_constraintStart_toStartOf="@id/containerRegisterBus"
+        app:layout_constraintTop_toTopOf="@+id/containerRegisterBus" />
+
+    <TextView
+        android:id="@+id/txtVehicleLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="8dp"
+        android:text="Tipo de Veículo"
+        android:textSize="16sp"
+        app:layout_constraintStart_toStartOf="@+id/containerRegisterBus"
+        app:layout_constraintTop_toBottomOf="@+id/txtBusInfo" />
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/menuDrop"
+        style="@style/Widget.Material3.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="32dp"
+        app:layout_constraintTop_toBottomOf="@+id/txtVehicleLabel"
+        app:layout_constraintEnd_toEndOf="@+id/containerRegisterBus"
+        app:layout_constraintStart_toStartOf="@+id/containerRegisterBus"
+        app:layout_constraintHorizontal_bias="0.5">
+
+        <com.google.android.material.textfield.MaterialAutoCompleteTextView
+            android:id="@+id/selectVehicleType"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Selecione o tipo de veículo"
+            android:padding="15dp"/>
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <TextView
+        android:id="@+id/txtLicensePlateLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="12dp"
+        android:text="Placa"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="@+id/containerRegisterBus"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/containerRegisterBus"
+        app:layout_constraintTop_toBottomOf="@+id/menuDrop" />
+
+    <EditText
+        android:id="@+id/edtLicensePlate"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="40dp"
+        android:layout_marginVertical="10dp"
+        android:layout_marginTop="56dp"
+        android:background="@drawable/container_edit_text_login"
+        android:hint="License Plate"
+        android:inputType="text"
+        android:maxLines="1"
+        android:padding="15dp"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintTop_toBottomOf="@+id/txtLicensePlateLabel"
+        app:layout_constraintEnd_toEndOf="@+id/containerRegisterBus"
+        app:layout_constraintStart_toStartOf="@+id/containerRegisterBus" />
+
+    <Button
+        android:id="@+id/btnRegisterBus"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="20dp"
+        android:layout_marginTop="20dp"
+        android:text="Register Bus"
+        android:textColor="@color/white"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintTop_toBottomOf="@+id/edtLicensePlate"
+        app:layout_constraintEnd_toEndOf="@+id/containerRegisterBus"
+        app:layout_constraintStart_toStartOf="@+id/containerRegisterBus" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

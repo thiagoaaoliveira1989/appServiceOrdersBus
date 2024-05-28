@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/dashboardLayout"
+    android:backgroundTint="@color/fundo"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/fundo"
+    tools:context=".views.dashboard.DashboardActivity">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/fundoDark"
+        android:theme="@style/ThemeOverlay.AppCompat.Light"
+        app:title="Ouro Negro - Dashboard"
+        app:titleTextColor="@color/black"
+        tools:ignore="MissingConstraints" />
+    <!-- Title -->
+
+
+
+    <!-- Bus -->
+
+    <Button
+        android:id="@+id/btnCadastrarOnibus"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:layout_marginHorizontal="20dp"
+        android:text="Cadastrar Ônibus"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:textColor="@color/white"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar"
+        app:layout_constraintStart_toStartOf="@+id/dashboardLayout"
+        app:layout_constraintEnd_toEndOf="@+id/dashboardLayout"
+        app:layout_constraintHorizontal_bias="0.5" />
+
+
+    <Button
+        android:id="@+id/btnListarOnibus"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_marginHorizontal="20dp"
+        android:text="Listar Ônibus"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:textColor="@color/white"
+        app:layout_constraintTop_toBottomOf="@+id/btnCadastrarOnibus"
+        app:layout_constraintStart_toStartOf="@+id/dashboardLayout"
+        app:layout_constraintEnd_toEndOf="@+id/dashboardLayout"
+        app:layout_constraintHorizontal_bias="0.5" />
+
+
+
+
+    <!-- Parts -->
+
+    <Button
+        android:id="@+id/btnCadastrarParts"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_marginHorizontal="20dp"
+        android:text="Cadastrar Peças"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:textColor="@color/white"
+        app:layout_constraintTop_toBottomOf="@+id/btnListarOnibus"
+        app:layout_constraintStart_toStartOf="@+id/dashboardLayout"
+        app:layout_constraintEnd_toEndOf="@+id/dashboardLayout"
+        app:layout_constraintHorizontal_bias="0.5" />
+
+    <Button
+        android:id="@+id/btnListarPeças"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_marginHorizontal="20dp"
+        android:text="Listar Peças"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:textColor="@color/white"
+        app:layout_constraintTop_toBottomOf="@+id/btnCadastrarParts"
+        app:layout_constraintStart_toStartOf="@+id/dashboardLayout"
+        app:layout_constraintEnd_toEndOf="@+id/dashboardLayout"
+        app:layout_constraintHorizontal_bias="0.5" />
+
+
+    <!-- Service Order -->
+
+    <Button
+        android:id="@+id/btnCadastrarOrdemServico"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_marginHorizontal="20dp"
+        android:text="Cadastrar Ordem de Serviço"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:textColor="@color/white"
+        app:layout_constraintTop_toBottomOf="@+id/btnListarPeças"
+        app:layout_constraintStart_toStartOf="@+id/dashboardLayout"
+        app:layout_constraintEnd_toEndOf="@+id/dashboardLayout"
+        app:layout_constraintHorizontal_bias="0.5" />
+
+    <Button
+        android:id="@+id/btnListarOrdemSerico"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_marginHorizontal="20dp"
+        android:text="Listar Ordem de Serviço"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:textColor="@color/white"
+        app:layout_constraintTop_toBottomOf="@+id/btnCadastrarOrdemServico"
+        app:layout_constraintStart_toStartOf="@+id/dashboardLayout"
+        app:layout_constraintEnd_toEndOf="@+id/dashboardLayout"
+        app:layout_constraintHorizontal_bias="0.5" />
+
+    <View
+        android:id="@+id/containerLogo"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginHorizontal="20dp"
+        android:background="@drawable/logo"
+        app:layout_constraintTop_toBottomOf="@+id/btnListarOrdemSerico"
+        app:layout_constraintStart_toStartOf="@+id/dashboardLayout"
+        app:layout_constraintEnd_toEndOf="@+id/dashboardLayout"
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteX="20dp" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
