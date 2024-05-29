@@ -7,17 +7,23 @@ import android.widget.ImageButton
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.maxcred.orderservice.R
+import com.maxcred.orderservice.data.db.dao.BusDAO
+import com.maxcred.orderservice.data.db.dao.PartDAO
 import com.maxcred.orderservice.data.db.entity.ServiceOrderEntity
-import com.maxcred.orderservice.repository.BusRepository
+import com.maxcred.orderservice.utils.OrderServiceReport
+import com.maxcred.orderservice.utils.PdfUtils
 import com.maxcred.orderservice.views.serviceOrder.ListServiceOrderActivity
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class ServiceOrderListAdapter(
     private var serviceOrderList: List<ServiceOrderEntity>,
-    private val busRepository: BusRepository
-) : RecyclerView.Adapter<ServiceOrderListAdapter.ServiceOrderViewHolder>() {
+    private var busRepository: BusDAO,
+    private var partRepository: PartDAO,
+
+    ) : RecyclerView.Adapter<ServiceOrderListAdapter.ServiceOrderViewHolder>() {
 
     inner class ServiceOrderViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val idOrderTextView: TextView = itemView.findViewById(R.id.textIdOrder)
@@ -63,6 +69,44 @@ class ServiceOrderListAdapter(
             val context = holder.itemView.context
             if (context is ListServiceOrderActivity) {
                 context.checkAndGeneratePdf(currentOrder)
+            }
+
+            // Aqui chamamos a função para gerar o PDF dentro de um bloco de coroutine
+            CoroutineScope(Dispatchers.Main).launch {
+                // Agora, dentro do bloco de coroutine, podemos chamar funções suspensas
+                val bus = withContext(Dispatchers.IO) {
+                    busRepository.getBusById(currentOrder.busId)
+                }
+                val vehicle = bus?.vehicle ?: "N/A"
+                val licensePlate = bus?.licensePlate ?: "N/A"
+
+                val partsLiveData = partRepository.getPartsForServiceOrder(currentOrder.id)
+                partsLiveData.observe(context as ListServiceOrderActivity) { parts ->
+                    val partsList = parts.map {
+                        OrderServiceReport.Peca(
+                            quantidade = it.partQty.toInt(),
+                            codigo = it.partCode ?: "",
+                            descricao = it.partDescription ?: "",
+                            custo = it.partCost.toDouble(),
+                            custoTotal = it.totalPartCostValue.toDouble()
+                        )
+                    }
+
+                    val orderServiceReport = OrderServiceReport(
+                        veiculo = vehicle,
+                        km = currentOrder.kmBus,
+                        placa = licensePlate,
+                        numeroOrdem = currentOrder.orderNumber ?: "",
+                        dataAbertura = currentOrder.startDate ?: "",
+                        dataFechamento = currentOrder.endDate ?: "",
+                        descricaoServico = currentOrder.description ?: "",
+                        pecasUtilizadas = partsList,
+                        mecanico = currentOrder.mechanic ?: "",
+                        supervisor = currentOrder.supervisor ?: ""
+                    )
+
+                    PdfUtils.generatePdf(holder.itemView.context, orderServiceReport)
+                }
             }
         }
     }

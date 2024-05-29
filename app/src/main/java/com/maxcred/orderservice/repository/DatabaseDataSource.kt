@@ -15,7 +15,7 @@ class DatabaseDataSource (
     private val registerDAO: RegisterDAO,
     private val busDAO: BusDAO,
     private val serviceOrderDAO: ServiceOrderDAO,
-    private val partDAO: PartDAO
+    private val partDAO: PartDAO,
 ) : RegisterRepository, BusRepository, ServiceOrderRepository, PartRepository {
 
     // Métodos para Register User

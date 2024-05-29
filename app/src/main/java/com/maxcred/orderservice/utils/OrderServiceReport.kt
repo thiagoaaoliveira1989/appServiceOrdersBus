@@ -122,7 +122,7 @@ class OrderServiceReport(
             <tr>
                 <th>Quantidade</th>
                 <th>Código</th>
-aa
+                <th>Descrição</th>
                 <th>Custo</th>
                 <th>Custo Total</th>
             </tr>

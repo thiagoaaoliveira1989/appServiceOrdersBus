@@ -64,15 +64,21 @@ class ListServiceOrderActivity : AppCompatActivity() {
 
         // Inicialização do repositório
         val database = AppDatabase.getInstance(this)
+        val busRepository = database.busDAO
+        val partRepository = database.partDAO
         repository = DatabaseDataSource(
             database.registerDAO,
-            database.busDAO,
+            busRepository,
             database.serviceOrderDAO,
-            database.partDAO
+            partRepository
         )
 
         // Inicialização do adaptador com a lógica para gerar PDF
-        adapter = ServiceOrderListAdapter(emptyList(), repository)
+        adapter = ServiceOrderListAdapter(
+            emptyList(),
+            busRepository,
+            partRepository
+        )
         recyclerView.adapter = adapter
 
         // Observa as alterações na lista de ordens de serviço
