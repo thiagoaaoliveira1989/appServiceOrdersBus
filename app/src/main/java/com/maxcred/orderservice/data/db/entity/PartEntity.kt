@@ -9,7 +9,7 @@ import androidx.room.PrimaryKey
     tableName = "part",
     foreignKeys = [ForeignKey(
         entity = ServiceOrderEntity::class,
-        parentColumns = ["id"],
+        parentColumns = ["orderNumber"],
         childColumns = ["serviceOrderId"],
         onDelete = ForeignKey.CASCADE
     )]
@@ -24,9 +24,9 @@ data class PartEntity(
     @ColumnInfo(name = "partDescription")
     val partDescription: String?,
     @ColumnInfo(name = "partCost")
-    val partCost: String,
+    val partCost: String?,
     @ColumnInfo(name = "totalPartCostValue")
-    val totalPartCostValue: String,
+    val totalPartCostValue: String?,
     @ColumnInfo(name = "serviceOrderId")
-    val serviceOrderId: Long // Foreign key to ServiceOrderEntity
+    val serviceOrderId: Long
 )

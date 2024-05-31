@@ -22,7 +22,7 @@ interface PartRepository {
 
     suspend fun deletePart(id: Long)
     suspend fun deleteAllParts()
-    suspend fun getPartById(id: Long)
+    suspend fun getPartById(id: Long): PartEntity?
     fun getAllParts(): LiveData<List<PartEntity>>
     suspend fun getPartsForServiceOrder(serviceOrderId: Long): LiveData<List<PartEntity>>
 }

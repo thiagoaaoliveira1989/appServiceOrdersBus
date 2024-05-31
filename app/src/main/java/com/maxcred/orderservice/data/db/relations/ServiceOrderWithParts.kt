@@ -6,7 +6,7 @@ import androidx.room.Relation
 data class ServiceOrderWithParts(
     @Embedded val serviceOrder: ServiceOrderEntity,
     @Relation(
-        parentColumn = "id",
+        parentColumn = "orderNumber",
         entityColumn = "serviceOrderId"
     )
     val parts: List<PartEntity>

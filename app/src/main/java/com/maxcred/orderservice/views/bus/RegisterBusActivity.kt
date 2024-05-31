@@ -52,6 +52,9 @@ class RegisterBusActivity : AppCompatActivity() {
             val licensePlateEditText = findViewById<EditText>(R.id.edtLicensePlate)
             val licensePlate = licensePlateEditText.text.toString()
 
+            val numberCarEditText = findViewById<EditText>(R.id.edtNumberCar)
+            val numberCar = numberCarEditText.text.toString()
+
             if (vehicle.isBlank() || licensePlate.isBlank()) {
                 Toast.makeText(this, "Por favor, preencha todos os campos", Toast.LENGTH_SHORT).show()
             } else {
@@ -64,10 +67,10 @@ class RegisterBusActivity : AppCompatActivity() {
                                 Toast.makeText(this@RegisterBusActivity, "Veiculo já cadastrado!", Toast.LENGTH_SHORT).show()
                             }
                         } else {
-                            val result = repository.insertBus(vehicle, licensePlate)
+                            val result = repository.insertBus(vehicle, licensePlate, numberCar)
                             runOnUiThread {
                                 Toast.makeText(this@RegisterBusActivity, "Ônibus cadastrado", Toast.LENGTH_SHORT).show()
-                                Log.i("RegisterBusActivity", "Ônibus cadastrado: ${result.id}, ${result.vehicle}, ${result.licensePlate}")
+                                Log.i("RegisterBusActivity", "Ônibus cadastrado: ${result}")
 
                                 // Retornar para a tela inicial após o cadastro bem-sucedido
                                 val intent = Intent(this@RegisterBusActivity, DashboardActivity::class.java)

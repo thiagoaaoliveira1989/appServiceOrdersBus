@@ -23,12 +23,7 @@ class ListBusActivity : AppCompatActivity() {
         setContentView(R.layout.activity_bus_list)
 
         val database = AppDatabase.getInstance(this)
-        repository = DatabaseDataSource(
-            database.registerDAO,
-            database.busDAO,
-            database.serviceOrderDAO,
-            database.partDAO
-        )
+        repository = DatabaseDataSource(database.registerDAO, database.busDAO, database.serviceOrderDAO, database.partDAO)
 
         recyclerView = findViewById(R.id.recycle_view_buslist)
         recyclerView.layoutManager = LinearLayoutManager(this)

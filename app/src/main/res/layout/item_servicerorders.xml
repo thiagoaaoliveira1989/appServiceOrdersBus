@@ -13,35 +13,9 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:padding="16dp">
 
-        <!-- TextView for ID -->
-        <TextView
-            android:id="@+id/textLayoutIdOrder"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:text="ID:"
-            android:textColor="@color/secundary"
-            android:textSize="16sp"
-            android:textStyle="bold"
-            app:layout_constraintEnd_toStartOf="@+id/textIdOrder"
-            app:layout_constraintHorizontal_chainStyle="packed"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <TextView
-            android:id="@+id/textIdOrder"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:text="12345"
-            android:textColor="@color/black"
-            android:textSize="16sp"
-            android:textStyle="bold"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_chainStyle="packed"
-            app:layout_constraintStart_toEndOf="@+id/textLayoutIdOrder"
-            app:layout_constraintTop_toTopOf="parent" />
 
         <!-- TextView for Order Number -->
         <TextView
@@ -55,7 +29,7 @@
             app:layout_constraintEnd_toStartOf="@+id/textOrderNumber"
             app:layout_constraintHorizontal_chainStyle="packed"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textLayoutIdOrder" />
+            tools:ignore="MissingConstraints" />
 
         <TextView
             android:id="@+id/textOrderNumber"
@@ -68,7 +42,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_chainStyle="packed"
             app:layout_constraintStart_toEndOf="@+id/textLayoutOrderNumber"
-            app:layout_constraintTop_toBottomOf="@+id/textIdOrder" />
+            tools:ignore="MissingConstraints" />
 
         <!-- TextView for Km Bus -->
         <TextView
@@ -169,6 +143,7 @@
             android:id="@+id/textDescription"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:maxLines="1"
             android:text="Manutenção preventiva"
             android:textColor="@color/black"
             android:textSize="16sp"
@@ -287,16 +262,63 @@
             app:layout_constraintTop_toBottomOf="@+id/textVehicle" />
 
 
+        <!-- TextView for License Plate -->
+        <TextView
+            android:id="@+id/textLayoutNumberCar"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Nº Do Onibus:"
+            android:textColor="@color/secundary"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toStartOf="@+id/textLicensePlate"
+            app:layout_constraintHorizontal_chainStyle="packed"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textLayoutLicensePlate" />
+
+        <TextView
+            android:id="@+id/textNumberCar"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="1234"
+            android:textColor="@color/black"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_chainStyle="packed"
+            app:layout_constraintStart_toEndOf="@+id/textLayoutLicensePlate"
+            app:layout_constraintTop_toBottomOf="@+id/textLicensePlate" />
+
+
         <!-- Icons for Edit and Delete -->
         <LinearLayout
             android:id="@+id/linearLayout"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:gravity="end"
+            android:layout_marginTop="35dp"
+            android:gravity="center"
             android:orientation="horizontal"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/textLicensePlate">
+
+
+            <ImageButton
+                android:id="@+id/btnPdfButton"
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:layout_gravity="start"
+                android:layout_margin="4dp"
+                android:background="@drawable/baseline_local_printshop_24"
+                android:contentDescription="Generate PDF"
+                app:layout_constraintBottom_toBottomOf="@id/editButtonOrder"
+                app:layout_constraintEnd_toStartOf="@+id/linearLayout"
+                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/textLicensePlate"
+                app:layout_constraintVertical_bias="1.0"
+                app:tint="@color/black"
+                tools:ignore="NotSibling" />
 
             <ImageButton
                 android:id="@+id/editButtonOrder"
@@ -320,23 +342,6 @@
                 android:scaleType="centerInside"
                 android:src="@drawable/baseline_delete_24" />
         </LinearLayout>
-
-        <ImageButton
-            android:id="@+id/btnPdfButton"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="188dp"
-            android:background="@drawable/baseline_local_printshop_24"
-            android:contentDescription="Generate PDF"
-            app:layout_constraintBottom_toBottomOf="@id/editButtonOrder"
-            app:layout_constraintEnd_toStartOf="@+id/linearLayout"
-            app:layout_constraintHorizontal_bias="1.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/textLicensePlate"
-            app:layout_constraintVertical_bias="1.0"
-            app:tint="@color/black"
-            tools:ignore="NotSibling" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

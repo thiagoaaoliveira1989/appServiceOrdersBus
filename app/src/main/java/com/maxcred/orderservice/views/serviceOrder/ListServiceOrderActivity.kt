@@ -25,6 +25,7 @@ import com.maxcred.orderservice.adaptador.ServiceOrderListAdapter
 import com.maxcred.orderservice.data.db.AppDatabase
 import com.maxcred.orderservice.data.db.entity.ServiceOrderEntity
 import com.maxcred.orderservice.repository.DatabaseDataSource
+import com.maxcred.orderservice.views.dashboard.DashboardActivity
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
@@ -46,6 +47,7 @@ class ListServiceOrderActivity : AppCompatActivity() {
         // Inicialização do RecyclerView
         recyclerView = findViewById(R.id.recycle_view_serviceorderlist)
         recyclerView.layoutManager = LinearLayoutManager(this)
+
 
         // Inicialização do ActivityResultLauncher para gerenciamento de permissões de armazenamento
         storageActivityResultLauncher = registerForActivityResult(
@@ -160,7 +162,22 @@ class ListServiceOrderActivity : AppCompatActivity() {
     // Método para gerar o PDF
     private fun generatePdf(serviceOrder: ServiceOrderEntity) {
         Log.d("GERAR PDF", "Gerando PDF para a ordem de serviço: ${serviceOrder.orderNumber}")
-        // Aqui você pode acessar as informações necessárias da ordem de serviço usando serviceOrder
-        // e gerar o PDF conforme necessário
     }
+
+    suspend fun deleteByOrderNumber(orderNumber: Long) {
+        try {
+            repository.deleteByOrderNumber(orderNumber)
+            Toast.makeText(this, "Ordem de Serviço Deletada", Toast.LENGTH_SHORT).show()
+
+
+            val intent = Intent(this@ListServiceOrderActivity, DashboardActivity::class.java)
+            startActivity(intent)
+            finish()
+
+        } catch (error: Exception) {
+            Toast.makeText(this, "Erro ao Deletar Ordem de Serviço", Toast.LENGTH_SHORT).show()
+        }
+    }
+
+
 }

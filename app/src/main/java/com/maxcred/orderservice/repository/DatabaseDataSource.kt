@@ -9,9 +9,8 @@ import com.maxcred.orderservice.data.db.entity.BusEntity
 import com.maxcred.orderservice.data.db.entity.PartEntity
 import com.maxcred.orderservice.data.db.entity.RegisterEntity
 import com.maxcred.orderservice.data.db.entity.ServiceOrderEntity
-import com.maxcred.orderservice.data.db.entity.ServiceOrderWithParts
 
-class DatabaseDataSource (
+class DatabaseDataSource(
     private val registerDAO: RegisterDAO,
     private val busDAO: BusDAO,
     private val serviceOrderDAO: ServiceOrderDAO,
@@ -39,9 +38,8 @@ class DatabaseDataSource (
     }
 
     override suspend fun deleteAll() {
-        registerDAO.deleteAll()
+        TODO("Not yet implemented")
     }
-
 
     override fun getAllRegister(): LiveData<List<RegisterEntity>> {
         return registerDAO.getAllRegister()
@@ -60,19 +58,18 @@ class DatabaseDataSource (
         return busDAO.getBusIdByPlate(licensePlate)
     }
 
-
     override suspend fun getBusByPlate(licensePlate: String): BusEntity? {
         return busDAO.getBusByPlate(licensePlate)
     }
 
-    override suspend fun insertBus(vehicle: String, licensePlate: String): BusResult {
-        val busEntity = BusEntity(0, vehicle, licensePlate)
+    override suspend fun insertBus(vehicle: String, licensePlate: String, numberCar: String): Long {
+        val busEntity = BusEntity(vehicle = vehicle, licensePlate = licensePlate, numberCar = numberCar)
         val id = busDAO.insertBus(busEntity)
-        return BusResult(id, vehicle, licensePlate)
+        return id
     }
 
-    override suspend fun updateBus(id: Long, vehicle: String, licensePlate: String) {
-        val busEntity = BusEntity(id, vehicle, licensePlate)
+    override suspend fun updateBus(id: Long, vehicle: String, licensePlate: String, numberCar: String) {
+        val busEntity = BusEntity(id = id, vehicle = vehicle, licensePlate = licensePlate, numberCar = numberCar)
         busDAO.updateBus(busEntity)
     }
 
@@ -81,7 +78,7 @@ class DatabaseDataSource (
     }
 
     override suspend fun deleteAllBuses() {
-        busDAO.deleteAllBuses()
+        TODO("Not yet implemented")
     }
 
     override fun getAllBuses(): LiveData<List<BusEntity>> {
@@ -91,7 +88,8 @@ class DatabaseDataSource (
     // Métodos para PartEntity
     override suspend fun insertPart(
         partQty: String, partCode: String?, partDescription: String?, partCost: String, totalPartCostValue: String,
-        serviceOrderId: Long): PartResult {
+        serviceOrderId: Long
+    ): PartResult {
         val part = PartEntity(
             partQty = partQty,
             partCode = partCode,
@@ -134,29 +132,11 @@ class DatabaseDataSource (
     }
 
     override suspend fun deleteAllParts() {
-        partDAO.deleteAll()
-    }
-
-    override suspend fun getPartById(id: Long) {
         TODO("Not yet implemented")
     }
 
-    override suspend fun getServiceOrderById(id: Long): ServiceOrderResult? {
-        val serviceOrder = serviceOrderDAO.getServiceOrderById(id)
-
-        return serviceOrder?.let {
-            ServiceOrderResult(
-                it.id,
-                it.orderNumber ?: "", // Se it.orderNumber for nulo, use uma string vazia
-                it.kmBus ?: "", // Se it.kmBus for nulo, use uma string vazia
-                it.startDate ?: "", // Se it.startDate for nulo, use uma string vazia
-                it.endDate ?: "", // Se it.endDate for nulo, use uma string vazia
-                it.description, // Não adicionamos verificação para description, pois já é permitido ser nulo
-                it.mechanic ?: "", // Se it.mechanic for nulo, use uma string vazia
-                it.supervisor ?: "", // Se it.supervisor for nulo, use uma string vazia
-                it.busId
-            )
-        }
+    override suspend fun getPartById(id: Long): PartEntity? {
+        return partDAO.getPartById(id)
     }
 
     override fun getAllParts(): LiveData<List<PartEntity>> {
@@ -168,56 +148,93 @@ class DatabaseDataSource (
     }
 
     // Métodos para ServiceOrderEntity
-    override suspend fun isServiceOrderNumberExists(orderNumber: String): Boolean {
+    // Implementação do ServiceOrderRepository
+
+    override suspend fun isServiceOrderNumberExists(orderNumber: Long): Boolean {
         return serviceOrderDAO.isServiceOrderNumberExists(orderNumber)
     }
 
-
+    override suspend fun getServiceOrderById(id: Long): ServiceOrderResult? {
+        val serviceOrder = serviceOrderDAO.getServiceOrderByOrderNumber(id)
+        return serviceOrder?.let {
+            ServiceOrderResult(
+                orderNumber = it.orderNumber,
+                kmBus = it.kmBus,
+                startDate = it.startDate,
+                endDate = it.endDate,
+                description = it.description,
+                mechanic = it.mechanic,
+                encarregado = it.encarregado,
+                busId = it.busId
+            )
+        }
+    }
 
     override suspend fun insertServiceOrder(
-        orderNumber: String, kmBus: String, startDate: String, endDate: String, description: String?,
-        mechanic: String, supervisor: String, busId: Long): ServiceOrderResult {
+        kmBus: String,
+        startDate: String,
+        endDate: String,
+        description: String?,
+        mechanic: String,
+        encarregado: String,
+        busId: Long
+    ): ServiceOrderResult {
         val serviceOrder = ServiceOrderEntity(
-            orderNumber = orderNumber,
             kmBus = kmBus,
             startDate = startDate,
             endDate = endDate,
             description = description,
             mechanic = mechanic,
-            supervisor = supervisor,
+            encarregado = encarregado,
             busId = busId
         )
         val id = serviceOrderDAO.insert(serviceOrder)
-        return ServiceOrderResult(id, orderNumber, kmBus, startDate, endDate, description, mechanic, supervisor, busId)
+        return ServiceOrderResult(
+            orderNumber = id,
+            kmBus = kmBus,
+            startDate = startDate,
+            endDate = endDate,
+            description = description,
+            mechanic = mechanic,
+            encarregado = encarregado,
+            busId = busId
+        )
     }
 
     override suspend fun updateServiceOrder(
-        id: Long, orderNumber: String, kmBus: String, startDate: String, endDate: String, description: String?,
-        mechanic: String, supervisor: String, busId: Long) {
+        orderNumber: Long,
+        kmBus: String,
+        startDate: String,
+        endDate: String,
+        description: String?,
+        mechanic: String,
+        encarregado: String,
+        busId: Long
+    ) {
         val serviceOrder = ServiceOrderEntity(
-            id = id,
             orderNumber = orderNumber,
             kmBus = kmBus,
             startDate = startDate,
             endDate = endDate,
             description = description,
             mechanic = mechanic,
-            supervisor = supervisor,
+            encarregado = encarregado,
             busId = busId
         )
         serviceOrderDAO.update(serviceOrder)
     }
 
-    override suspend fun deleteServiceOrder(id: Long) {
-        serviceOrderDAO.deleteById(id)
+
+    override suspend fun deleteByOrderNumber(orderNumber: Long) {
+        serviceOrderDAO.deleteByOrderNumber(orderNumber)
     }
 
-    override  fun getAllServiceOrders(): LiveData<List<ServiceOrderEntity>> {
+    override fun getAllServiceOrders(): LiveData<List<ServiceOrderEntity>> {
         return serviceOrderDAO.getAllServiceOrders()
     }
 
-
-    override suspend fun getServiceOrderIdByPlate(orderNumber: String): Long {
-        return serviceOrderDAO.getServiceOrderIdByPlate(orderNumber)
+    override suspend fun getServiceOrderIdByPlate(orderNumber: Long): Long {
+        return serviceOrderDAO.getServiceOrderIdByOrderNumber(orderNumber)
     }
+
 }

@@ -50,7 +50,7 @@ class RegisterPartActivity: AppCompatActivity()  {
         val btnRegister: Button = findViewById(R.id.btnRegisterPart)
         btnRegister.setOnClickListener {
             val orderNumberEditText = findViewById<EditText>(R.id.selectPartsType)
-            val orderNumber = orderNumberEditText.text.toString()
+            val orderNumber = orderNumberEditText.text.toString().toLongOrNull()
 
             val partQtyEditText = findViewById<EditText>(R.id.edtQuantity)
 
@@ -70,8 +70,9 @@ class RegisterPartActivity: AppCompatActivity()  {
             // Converter o valor total de volta para uma string
             val totalPartCostValueString = totalPartCostValue.toString()
 
-            if (orderNumber.isBlank() || partQty == 0 || partCode.isBlank() || partDescription.isBlank() ||  partCost == 0.0) {
-                Toast.makeText(this, "Por favor, preencha todos os campos corretamente", Toast.LENGTH_SHORT).show()
+
+            if (orderNumber == null  || partQty == 0  || partDescription.isBlank() ) {
+                Toast.makeText(this, "Por favor, preencha todos os campos de Quantidade e Descrição", Toast.LENGTH_SHORT).show()
             } else {
                 lifecycleScope.launch(Dispatchers.IO) {
                     try {

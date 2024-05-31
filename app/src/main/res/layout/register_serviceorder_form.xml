@@ -39,23 +39,7 @@
         app:layout_constraintTop_toTopOf="@+id/containerRegisterServiceOrder" />
 
 
-    <com.google.android.material.textfield.TextInputEditText
-        android:id="@+id/edtNumberServiceOrder"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="40dp"
-        android:layout_marginVertical="10dp"
-        android:layout_marginTop="32dp"
-        android:autoText="false"
-        android:background="@drawable/container_edit_text_login"
-        android:hint="Nº da Ordem de Serviço"
-        android:inputType="text"
-        android:maxLines="1"
-        android:padding="15dp"
-        app:layout_constraintEnd_toEndOf="@+id/containerRegisterServiceOrder"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="@+id/containerRegisterServiceOrder"
-        app:layout_constraintTop_toBottomOf="@+id/txtBusInfo" />
+
 
 
     <com.google.android.material.textfield.TextInputLayout
@@ -69,7 +53,7 @@
         app:layout_constraintEnd_toEndOf="@+id/containerRegisterServiceOrder"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="@+id/containerRegisterServiceOrder"
-        app:layout_constraintTop_toBottomOf="@+id/edtNumberServiceOrder">
+        app:layout_constraintTop_toBottomOf="@+id/txtBusInfo">
 
         <com.google.android.material.textfield.MaterialAutoCompleteTextView
             android:id="@+id/selectVehicleTypeServiceOrder"
@@ -134,13 +118,13 @@
     <EditText
         android:id="@+id/edtDescriptionServiceOrder"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="100dp"
         android:layout_marginHorizontal="40dp"
         android:layout_marginVertical="10dp"
         android:layout_marginTop="56dp"
-        android:background="@drawable/container_edit_text_login"
         android:hint="Descrição"
-        android:inputType="text"
+        android:inputType="textMultiLine"
+        android:background="@drawable/textarea"
         android:maxLines="10"
         android:padding="15dp"
         app:layout_constraintEnd_toEndOf="@+id/containerRegisterServiceOrder"

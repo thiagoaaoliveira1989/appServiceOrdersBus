@@ -15,17 +15,17 @@ interface ServiceOrderDAO {
     @Insert
     suspend fun insert(serviceOrder: ServiceOrderEntity): Long
 
-    @Query("SELECT id FROM service_order WHERE orderNumber = :orderNumber LIMIT 1")
-    suspend fun getServiceOrderIdByPlate(orderNumber: String): Long
+    @Query("SELECT orderNumber FROM service_order WHERE orderNumber = :orderNumber LIMIT 1")
+    suspend fun getServiceOrderIdByOrderNumber(orderNumber: Long): Long
 
-    @Query("SELECT * FROM service_order WHERE id = :id")
-    suspend fun getServiceOrderById(id: Long): ServiceOrderEntity?
+    @Query("SELECT * FROM service_order WHERE orderNumber = :orderNumber")
+    suspend fun getServiceOrderByOrderNumber(orderNumber: Long): ServiceOrderEntity?
 
     @Update
     suspend fun update(serviceOrder: ServiceOrderEntity)
 
-    @Query("DELETE FROM service_order WHERE id = :id")
-    suspend fun deleteById(id: Long)
+    @Query("DELETE FROM service_order WHERE orderNumber = :orderNumber")
+    suspend fun deleteByOrderNumber(orderNumber: Long)
 
     @Query("DELETE FROM service_order")
     suspend fun deleteAll()
@@ -33,10 +33,10 @@ interface ServiceOrderDAO {
     @Query("SELECT * FROM service_order")
     fun getAllServiceOrders(): LiveData<List<ServiceOrderEntity>>
 
-    @Query("SELECT COUNT(*) FROM service_order WHERE orderNumber = :orderNumber")
-    suspend fun isServiceOrderNumberExists(orderNumber: String): Boolean
+    @Query("SELECT COUNT(*) > 0 FROM service_order WHERE orderNumber = :orderNumber")
+    suspend fun isServiceOrderNumberExists(orderNumber: Long): Boolean
 
     @Transaction
-    @Query("SELECT * FROM service_order WHERE id = :orderId")
-    suspend fun getServiceOrderWithParts(orderId: Long): ServiceOrderWithParts?
+    @Query("SELECT * FROM service_order WHERE orderNumber = :orderNumber")
+    suspend fun getServiceOrderWithParts(orderNumber: Long): ServiceOrderWithParts?
 }

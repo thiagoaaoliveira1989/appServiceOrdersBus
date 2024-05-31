@@ -11,5 +11,7 @@ data class BusEntity(
     @ColumnInfo(name = "vehicle")
     val vehicle: String?,
     @ColumnInfo(name = "licensePlate")
-    val licensePlate: String
+    val licensePlate: String,
+    @ColumnInfo(name = "numberCar")
+    val numberCar: String,
 )

@@ -15,7 +15,7 @@ import com.maxcred.orderservice.data.db.entity.ServiceOrderEntity
 
 @Database(
     entities = [RegisterEntity::class, BusEntity::class, ServiceOrderEntity::class, PartEntity::class],
-    version = 6
+    version = 7
 )
 abstract class AppDatabase : RoomDatabase() {
     abstract val busDAO: BusDAO

@@ -42,7 +42,7 @@ class PartListAdapter(
             val serviceOrder = serviceOrderRepository.getServiceOrderById(currentPart.serviceOrderId)
             val serviceOrderNumber = serviceOrder?.orderNumber ?: "N/A"
 
-            holder.serviceOrderIdTextView.text = serviceOrderNumber
+            holder.serviceOrderIdTextView.text = serviceOrderNumber.toString()
         }
 
         holder.partQtyTextView.text = currentPart.partQty
