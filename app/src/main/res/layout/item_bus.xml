@@ -139,7 +139,7 @@
             android:layout_marginTop="16dp">
 
             <ImageButton
-                android:id="@+id/editButtonOrder"
+                android:id="@+id/editButtonBus"
                 android:layout_width="35dp"
                 android:layout_height="35dp"
                 android:layout_margin="4dp"
@@ -150,7 +150,7 @@
                 android:padding="4dp" />
 
             <ImageButton
-                android:id="@+id/deleteButtonOrder"
+                android:id="@+id/deleteButtonBus"
                 android:layout_width="35dp"
                 android:layout_height="35dp"
                 android:layout_margin="4dp"

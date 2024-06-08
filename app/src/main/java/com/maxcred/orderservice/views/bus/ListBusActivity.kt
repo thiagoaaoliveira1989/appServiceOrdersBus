@@ -1,6 +1,8 @@
 package com.maxcred.orderservice.views.bus
 
+import android.content.Intent
 import android.os.Bundle
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -8,6 +10,7 @@ import com.maxcred.orderservice.R
 import com.maxcred.orderservice.adaptador.BusListAdapter
 import com.maxcred.orderservice.data.db.AppDatabase
 import com.maxcred.orderservice.repository.DatabaseDataSource
+import com.maxcred.orderservice.views.dashboard.DashboardActivity
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
@@ -44,6 +47,20 @@ class ListBusActivity : AppCompatActivity() {
                     }
                 }
             }
+        }
+    }
+
+    suspend fun deleteById(id: Long) {
+        try {
+            repository.deleteBus(id)
+            Toast.makeText(this, "Veículo Deletado", Toast.LENGTH_SHORT).show()
+
+            val intent = Intent(this@ListBusActivity, DashboardActivity::class.java)
+            startActivity(intent)
+            finish()
+
+        } catch (error: Exception) {
+            Toast.makeText(this, "Erro ao Deletar Veículo", Toast.LENGTH_SHORT).show()
         }
     }
 }

@@ -15,11 +15,11 @@ import androidx.room.PrimaryKey
 )
 data class ServiceOrderEntity(
     @PrimaryKey(autoGenerate = true) val orderNumber: Long = 0,
-    val kmBus: String,
-    val startDate: String,
-    val endDate: String,
-    val description: String?,
-    val mechanic: String,
-    val encarregado: String,
+    var kmBus: String,
+    var startDate: String,
+    var endDate: String,
+    var description: String?,
+    var mechanic: String,
+    var encarregado: String,
     val busId: Long
 )

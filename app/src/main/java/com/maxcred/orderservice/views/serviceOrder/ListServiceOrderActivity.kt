@@ -25,6 +25,7 @@ import com.maxcred.orderservice.adaptador.ServiceOrderListAdapter
 import com.maxcred.orderservice.data.db.AppDatabase
 import com.maxcred.orderservice.data.db.entity.ServiceOrderEntity
 import com.maxcred.orderservice.repository.DatabaseDataSource
+import com.maxcred.orderservice.utils.PdfUtils
 import com.maxcred.orderservice.views.dashboard.DashboardActivity
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -47,7 +48,6 @@ class ListServiceOrderActivity : AppCompatActivity() {
         // Inicialização do RecyclerView
         recyclerView = findViewById(R.id.recycle_view_serviceorderlist)
         recyclerView.layoutManager = LinearLayoutManager(this)
-
 
         // Inicialização do ActivityResultLauncher para gerenciamento de permissões de armazenamento
         storageActivityResultLauncher = registerForActivityResult(
@@ -88,15 +88,18 @@ class ListServiceOrderActivity : AppCompatActivity() {
             repository.getAllServiceOrders().observe(this@ListServiceOrderActivity) { serviceOrderList ->
                 serviceOrderList?.let {
                     if (it.isNotEmpty()) {
-                        println("Service order list size: ${serviceOrderList.size}")
-                        // Atualiza os itens do adaptador com a nova lista de ordens de serviço
-                        adapter.updateServiceOrderList(serviceOrderList)
+                        // Ordena a lista em ordem decrescente com base no número da ordem de serviço
+                        val sortedList = it.sortedByDescending { serviceOrder -> serviceOrder.orderNumber }
+                        println("Service order list size: ${sortedList.size}")
+                        // Atualiza os itens do adaptador com a nova lista de ordens de serviço ordenada
+                        adapter.updateServiceOrderList(sortedList)
                     } else {
                         // Se a lista estiver vazia, não faz nada ou mostra uma mensagem para o usuário
                     }
                 }
             }
         }
+
     }
 
     // Verifica permissões de armazenamento e gera o PDF
@@ -169,7 +172,6 @@ class ListServiceOrderActivity : AppCompatActivity() {
             repository.deleteByOrderNumber(orderNumber)
             Toast.makeText(this, "Ordem de Serviço Deletada", Toast.LENGTH_SHORT).show()
 
-
             val intent = Intent(this@ListServiceOrderActivity, DashboardActivity::class.java)
             startActivity(intent)
             finish()
@@ -178,6 +180,4 @@ class ListServiceOrderActivity : AppCompatActivity() {
             Toast.makeText(this, "Erro ao Deletar Ordem de Serviço", Toast.LENGTH_SHORT).show()
         }
     }
-
-
 }

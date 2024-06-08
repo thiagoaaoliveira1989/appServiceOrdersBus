@@ -1,5 +1,7 @@
 package com.maxcred.orderservice.adaptador
 
+import android.app.AlertDialog
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -13,6 +15,7 @@ import com.maxcred.orderservice.data.db.dao.PartDAO
 import com.maxcred.orderservice.data.db.entity.ServiceOrderEntity
 import com.maxcred.orderservice.utils.OrderServiceReport
 import com.maxcred.orderservice.utils.PdfUtils
+import com.maxcred.orderservice.views.serviceOrder.EditServiceOrderActivity
 import com.maxcred.orderservice.views.serviceOrder.ListServiceOrderActivity
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -22,9 +25,8 @@ import kotlinx.coroutines.withContext
 class ServiceOrderListAdapter(
     private var serviceOrderList: List<ServiceOrderEntity>,
     private var busRepository: BusDAO,
-    private var partRepository: PartDAO,
-
-    ) : RecyclerView.Adapter<ServiceOrderListAdapter.ServiceOrderViewHolder>() {
+    private var partRepository: PartDAO
+) : RecyclerView.Adapter<ServiceOrderListAdapter.ServiceOrderViewHolder>() {
 
     inner class ServiceOrderViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val idOrderTextView: TextView = itemView.findViewById(R.id.textOrderNumber)
@@ -75,17 +77,13 @@ class ServiceOrderListAdapter(
                 context.checkAndGeneratePdf(currentOrder)
             }
 
-            // Aqui chamamos a função para gerar o PDF dentro de um bloco de coroutine
             CoroutineScope(Dispatchers.Main).launch {
-                // Agora, dentro do bloco de coroutine, podemos chamar funções suspensas
                 val bus = withContext(Dispatchers.IO) {
                     busRepository.getBusById(currentOrder.busId)
                 }
                 val vehicle = bus?.vehicle ?: "N/A"
                 val licensePlate = bus?.licensePlate ?: "N/A"
                 val numberCar = bus?.numberCar ?: "N/A"
-
-
 
                 val partsLiveData = partRepository.getPartsForServiceOrder(currentOrder.orderNumber)
                 partsLiveData.observe(context as ListServiceOrderActivity) { parts ->
@@ -120,18 +118,31 @@ class ServiceOrderListAdapter(
 
         holder.btnEditar.setOnClickListener {
             val context = holder.itemView.context
+            val intent = Intent(context, EditServiceOrderActivity::class.java).apply {
+                putExtra("SERVICE_ORDER_ID", currentOrder.orderNumber)
+            }
+            context.startActivity(intent)
         }
-
 
         holder.btnDeletar.setOnClickListener {
             val context = holder.itemView.context
             if (context is ListServiceOrderActivity) {
+                val builder = AlertDialog.Builder(context)
+                builder.setTitle("Confirmação")
+                    .setMessage("Tem certeza de que deseja excluir a Ordem de Serviço?")
+                    .setPositiveButton("Excluir") { dialog, _ ->
                 context.lifecycleScope.launch {
                     context.deleteByOrderNumber(currentOrder.orderNumber)
                 }
+                        dialog.dismiss()
+                    }
+                    .setNegativeButton("Cancelar") { dialog, _ ->
+                        dialog.dismiss()
+                    }
+                val dialog = builder.create()
+                dialog.show()
             }
         }
-
     }
 
     fun updateServiceOrderList(newOrderList: List<ServiceOrderEntity>) {

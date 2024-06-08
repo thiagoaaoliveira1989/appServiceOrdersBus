@@ -17,6 +17,7 @@ import com.maxcred.orderservice.repository.DatabaseDataSource
 import com.maxcred.orderservice.views.dashboard.DashboardActivity
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import java.util.Locale
 
 class RegisterServiceOrderActivity : AppCompatActivity() {
 
@@ -85,13 +86,13 @@ class RegisterServiceOrderActivity : AppCompatActivity() {
                 val endDate = endDateEditText.text.toString()
 
                 val descriptionEditText = findViewById<EditText>(R.id.edtDescriptionServiceOrder)
-                val description = descriptionEditText.text.toString()
+                val description = descriptionEditText.text.toString().uppercase(Locale.getDefault())
 
                 val mechanicEditText = findViewById<EditText>(R.id.edtMechanic)
-                val mechanic = mechanicEditText.text.toString()
+                val mechanic = mechanicEditText.text.toString().uppercase(Locale.getDefault())
 
                 val supervisorEditText = findViewById<EditText>(R.id.selectSupervisor)
-                val encarregado = supervisorEditText.text.toString()
+                val encarregado = supervisorEditText.text.toString().uppercase(Locale.getDefault())
 
                 lifecycleScope.launch(Dispatchers.IO) {
                     try {

@@ -17,6 +17,7 @@ import com.maxcred.orderservice.repository.DatabaseDataSource
 import com.maxcred.orderservice.views.dashboard.DashboardActivity
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import java.util.Locale
 
 class RegisterPartActivity: AppCompatActivity()  {
     private lateinit var repository: DatabaseDataSource
@@ -55,7 +56,7 @@ class RegisterPartActivity: AppCompatActivity()  {
             val partQtyEditText = findViewById<EditText>(R.id.edtQuantity)
 
             val partDescriptionEditText = findViewById<EditText>(R.id.edtDescriptionPart)
-            val partDescription = partDescriptionEditText.text.toString()
+            val partDescription = partDescriptionEditText.text.toString().uppercase(Locale.getDefault())
 
             val partCodeEditText = findViewById<EditText>(R.id.edtCode)
             val partCode = partCodeEditText.text.toString()
