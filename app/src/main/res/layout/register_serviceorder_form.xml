@@ -14,7 +14,7 @@
     <View
         android:id="@+id/containerRegisterServiceOrder"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="700dp"
         android:layout_marginHorizontal="5dp"
         android:background="@drawable/container_login"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -81,39 +81,49 @@
         app:layout_constraintStart_toStartOf="@+id/containerRegisterServiceOrder"
         app:layout_constraintTop_toBottomOf="@+id/menuDropVeiculoServiceOrder" />
 
-    <EditText
-        android:id="@+id/edtStartDate"
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/textInputLayoutStartDate"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="40dp"
         android:layout_marginVertical="10dp"
         android:layout_marginTop="56dp"
-        android:background="@drawable/container_edit_text_login"
-        android:hint="Data de Abertura dd-mm-aaaa"
-        android:inputType="text"
-        android:maxLines="1"
-        android:padding="15dp"
         app:layout_constraintEnd_toEndOf="@+id/containerRegisterServiceOrder"
-        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="@+id/containerRegisterServiceOrder"
-        app:layout_constraintTop_toBottomOf="@+id/edtKm" />
+        app:layout_constraintTop_toBottomOf="@+id/edtKm">
 
-    <EditText
-        android:id="@+id/edtEndDate"
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/edtStartDate"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Data de Abertura dd-mm-aaaa"
+            android:inputType="date"
+            android:focusable="false"
+            android:clickable="true"
+            android:padding="15dp" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/textInputLayoutEndDate"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="40dp"
         android:layout_marginVertical="10dp"
         android:layout_marginTop="56dp"
-        android:background="@drawable/container_edit_text_login"
-        android:hint="Data de Fechamento dd-mm-aaaa"
-        android:inputType="text"
-        android:maxLines="1"
-        android:padding="15dp"
         app:layout_constraintEnd_toEndOf="@+id/containerRegisterServiceOrder"
-        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="@+id/containerRegisterServiceOrder"
-        app:layout_constraintTop_toBottomOf="@+id/edtStartDate" />
+        app:layout_constraintTop_toBottomOf="@+id/textInputLayoutStartDate">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/edtEndDate"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Data de Fechamento dd-mm-aaaa"
+            android:inputType="date"
+            android:focusable="false"
+            android:clickable="true"
+            android:padding="15dp" />
+    </com.google.android.material.textfield.TextInputLayout>
 
     <EditText
         android:id="@+id/edtDescriptionServiceOrder"
@@ -130,7 +140,7 @@
         app:layout_constraintEnd_toEndOf="@+id/containerRegisterServiceOrder"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="@+id/containerRegisterServiceOrder"
-        app:layout_constraintTop_toBottomOf="@+id/edtEndDate" />
+        app:layout_constraintTop_toBottomOf="@+id/textInputLayoutEndDate" />
 
     <EditText
         android:id="@+id/edtMechanic"
@@ -149,28 +159,6 @@
         app:layout_constraintStart_toStartOf="@+id/containerRegisterServiceOrder"
         app:layout_constraintTop_toBottomOf="@+id/edtDescriptionServiceOrder" />
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/menuDropSupervisorServiceOrder"
-        style="@style/Widget.Material3.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="40dp"
-        android:layout_marginVertical="10dp"
-        android:layout_marginTop="16dp"
-        app:layout_constraintEnd_toEndOf="@+id/containerRegisterServiceOrder"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="@+id/containerRegisterServiceOrder"
-        app:layout_constraintTop_toBottomOf="@+id/edtMechanic">
-
-        <com.google.android.material.textfield.MaterialAutoCompleteTextView
-            android:id="@+id/selectSupervisor"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Selecione o Supervisor"
-            android:padding="15dp" />
-    </com.google.android.material.textfield.TextInputLayout>
-
-
     <Button
         android:id="@+id/btnRegisterServiceOrder"
         android:layout_width="0dp"
@@ -184,7 +172,7 @@
         app:layout_constraintEnd_toEndOf="@+id/containerRegisterServiceOrder"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="@+id/containerRegisterServiceOrder"
-        app:layout_constraintTop_toBottomOf="@+id/menuDropSupervisorServiceOrder" />
+        app:layout_constraintTop_toBottomOf="@+id/edtMechanic" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

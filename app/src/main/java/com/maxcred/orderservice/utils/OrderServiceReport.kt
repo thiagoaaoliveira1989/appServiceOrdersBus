@@ -152,7 +152,7 @@ class OrderServiceReport(
             .description {
                 border: 1px solid #000;
                 padding: 8px;
-                min-height: 200px;
+                min-height: 100px;
             }
             .description ul {
                 list-style-type: circle;

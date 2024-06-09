@@ -1,6 +1,7 @@
 package com.maxcred.orderservice.views.serviceOrder
 
 import android.annotation.SuppressLint
+import android.app.DatePickerDialog
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
@@ -19,6 +20,7 @@ import com.maxcred.orderservice.repository.DatabaseDataSource
 import com.maxcred.orderservice.views.dashboard.DashboardActivity
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import java.util.Calendar
 import java.util.Locale
 
 class EditServiceOrderActivity : AppCompatActivity() {
@@ -58,6 +60,18 @@ class EditServiceOrderActivity : AppCompatActivity() {
             }
         }
 
+        // Initialize date fields
+        val startDateEditText = findViewById<EditText>(R.id.edtStartDateEdit)
+        val endDateEditText = findViewById<EditText>(R.id.edtEndDateEdit)
+
+        startDateEditText.setOnClickListener {
+            showDatePickerDialog(startDateEditText)
+        }
+
+        endDateEditText.setOnClickListener {
+            showDatePickerDialog(endDateEditText)
+        }
+
         // Load service order details
         loadServiceOrderDetails(serviceOrderId)
 
@@ -66,9 +80,7 @@ class EditServiceOrderActivity : AppCompatActivity() {
             if (selectedVehicleId != -1L) {
                 val kmBusEditText = findViewById<EditText>(R.id.edtKmEdit)
                 val kmBus = kmBusEditText.text.toString()
-                val startDateEditText = findViewById<EditText>(R.id.edtStartDateEdit)
                 val startDate = startDateEditText.text.toString()
-                val endDateEditText = findViewById<EditText>(R.id.edtEndDateEdit)
                 val endDate = endDateEditText.text.toString()
                 val descriptionEditText = findViewById<EditText>(R.id.edtDescriptionServiceOrderEdit)
                 val description = descriptionEditText.text.toString()
@@ -170,5 +182,24 @@ class EditServiceOrderActivity : AppCompatActivity() {
                 }
             }
         }
+    }
+
+    private fun showDatePickerDialog(editText: EditText) {
+        val calendar = Calendar.getInstance()
+        val year = calendar.get(Calendar.YEAR)
+        val month = calendar.get(Calendar.MONTH)
+        val day = calendar.get(Calendar.DAY_OF_MONTH)
+
+        val datePickerDialog = DatePickerDialog(
+            this,
+            { _, selectedYear, selectedMonth, selectedDay ->
+                val selectedDate = String.format("%02d-%02d-%d", selectedDay, selectedMonth + 1, selectedYear)
+                editText.setText(selectedDate)
+            },
+            year,
+            month,
+            day
+        )
+        datePickerDialog.show()
     }
 }

@@ -1,6 +1,6 @@
 package com.maxcred.orderservice.views.part
 
-
+import android.content.DialogInterface
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
@@ -8,6 +8,7 @@ import android.widget.ArrayAdapter
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
 import com.google.android.material.textfield.MaterialAutoCompleteTextView
@@ -19,8 +20,9 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import java.util.Locale
 
-class RegisterPartActivity: AppCompatActivity()  {
+class RegisterPartActivity : AppCompatActivity() {
     private lateinit var repository: DatabaseDataSource
+    private var orderNumber: Long = -1 // Inicializa como -1
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -30,7 +32,7 @@ class RegisterPartActivity: AppCompatActivity()  {
         val database = AppDatabase.getInstance(this)
         repository = DatabaseDataSource(database.registerDAO, database.busDAO, database.serviceOrderDAO, database.partDAO)
 
-        // Observe the LiveData from the repository to get the list of buses
+        // Observe the LiveData from the repository to get the list of service orders
         repository.getAllServiceOrders().observe(this) { orders ->
             try {
                 val ordersTypes = orders.map { it.orderNumber }.toTypedArray()
@@ -39,40 +41,34 @@ class RegisterPartActivity: AppCompatActivity()  {
                 val adapterOrders = ArrayAdapter(this@RegisterPartActivity, android.R.layout.simple_dropdown_item_1line, ordersTypes)
 
                 // Find the MaterialAutoCompleteTextView and set the adapter
-                val autoCompleteVehicleTextView = findViewById<MaterialAutoCompleteTextView>(R.id.selectPartsType)
-                autoCompleteVehicleTextView.setAdapter(adapterOrders)
+                val autoCompleteOrderNumberTextView = findViewById<MaterialAutoCompleteTextView>(R.id.selectPartsType)
+                autoCompleteOrderNumberTextView.setAdapter(adapterOrders)
 
+                // Set onItemClickListener to retrieve the selected order number
+                autoCompleteOrderNumberTextView.setOnItemClickListener { _, _, position, _ ->
+                    orderNumber = orders[position].orderNumber
+                }
             } catch (e: Exception) {
-                Log.e("RegisterPartsActivity", "Erro ao carregar peças", e)
+                Log.e("RegisterPartsActivity", "Erro ao carregar ordens de serviço", e)
             }
         }
 
-
         val btnRegister: Button = findViewById(R.id.btnRegisterPart)
         btnRegister.setOnClickListener {
-            val orderNumberEditText = findViewById<EditText>(R.id.selectPartsType)
-            val orderNumber = orderNumberEditText.text.toString().toLongOrNull()
-
             val partQtyEditText = findViewById<EditText>(R.id.edtQuantity)
-
             val partDescriptionEditText = findViewById<EditText>(R.id.edtDescriptionPart)
-            val partDescription = partDescriptionEditText.text.toString().uppercase(Locale.getDefault())
-
             val partCodeEditText = findViewById<EditText>(R.id.edtCode)
-            val partCode = partCodeEditText.text.toString()
-
             val partCostEditText = findViewById<EditText>(R.id.edtCost)
 
             val partQty = partQtyEditText.text.toString().toIntOrNull() ?: 0
+            val partDescription = partDescriptionEditText.text.toString().uppercase(Locale.getDefault())
+            val partCode = partCodeEditText.text.toString()
             val partCost = partCostEditText.text.toString().toDoubleOrNull() ?: 0.0
 
             val totalPartCostValue = partQty * partCost
-
-            // Converter o valor total de volta para uma string
             val totalPartCostValueString = totalPartCostValue.toString()
 
-
-            if (orderNumber == null  || partQty == 0  || partDescription.isBlank() ) {
+            if (orderNumber == null || partQty == 0 || partDescription.isBlank()) {
                 Toast.makeText(this, "Por favor, preencha todos os campos de Quantidade e Descrição", Toast.LENGTH_SHORT).show()
             } else {
                 lifecycleScope.launch(Dispatchers.IO) {
@@ -80,24 +76,35 @@ class RegisterPartActivity: AppCompatActivity()  {
                         val isServiceOrderNumberExists = repository.isServiceOrderNumberExists(orderNumber)
                         if (!isServiceOrderNumberExists) {
                             runOnUiThread {
-                                Toast.makeText(this@RegisterPartActivity, "Numero da ordem de serviço não existe", Toast.LENGTH_SHORT).show()
+                                Toast.makeText(this@RegisterPartActivity, "Número da ordem de serviço não existe", Toast.LENGTH_SHORT).show()
                             }
                         } else {
-                            val serviceOrderId = repository.getServiceOrderIdByPlate(orderNumber) // Pega o ID do ônibus pela placa
+                            val serviceOrderId = repository.getServiceOrderIdByPlate(orderNumber)
                             val result = repository.insertPart(partQty.toString(), partCode, partDescription, partCost.toString(), totalPartCostValueString, serviceOrderId)
-                            runOnUiThread {
-                                Toast.makeText(this@RegisterPartActivity, "Peças cadastradas", Toast.LENGTH_SHORT).show()
-                                Log.i("RegisterPartsActivity", "Peças cadastrada: id: ${result.id}")
 
-                                val intent = Intent(this@RegisterPartActivity, DashboardActivity::class.java)
-                                startActivity(intent)
-                                finish()
+                            runOnUiThread {
+                                AlertDialog.Builder(this@RegisterPartActivity)
+                                    .setMessage("Deseja adicionar outra peça?")
+                                    .setPositiveButton("Sim") { _: DialogInterface, _: Int ->
+                                        // Limpa os campos após cadastrar a peça
+                                        partQtyEditText.text.clear()
+                                        partDescriptionEditText.text.clear()
+                                        partCodeEditText.text.clear()
+                                        partCostEditText.text.clear()
+                                    }
+                                    .setNegativeButton("Não") { _: DialogInterface, _: Int ->
+                                        // Se o usuário disser não, volta para o dashboard
+                                        val intent = Intent(this@RegisterPartActivity, DashboardActivity::class.java)
+                                        startActivity(intent)
+                                        finish()
+                                    }
+                                    .show()
                             }
                         }
                     } catch (e: Exception) {
-                        Log.e("RegisterPartsActivity", "Erro ao cadastrar Peças", e)
+                        Log.e("RegisterPartsActivity", "Erro ao cadastrar peças", e)
                         runOnUiThread {
-                            Toast.makeText(this@RegisterPartActivity, "Erro ao cadastrar Peças", Toast.LENGTH_SHORT).show()
+                            Toast.makeText(this@RegisterPartActivity, "Erro ao cadastrar peças", Toast.LENGTH_SHORT).show()
                         }
                     }
                 }
