@@ -64,7 +64,7 @@
             android:layout_marginTop="10dp"
             android:background="@drawable/button_background"
             android:backgroundTint="#B32F2F"
-            android:text="1º - Cadastrar Ônibus"
+            android:text="1º - Cadastro Ônibus"
             android:textAlignment="textStart"
             android:textColor="@color/white"
             android:textSize="18sp"

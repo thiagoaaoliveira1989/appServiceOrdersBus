@@ -80,21 +80,6 @@
         app:layout_constraintEnd_toEndOf="@+id/containerLogin"
         app:layout_constraintHorizontal_bias="0.5" />
 
-    <TextView
-        android:id="@+id/txtForgotPassword"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:text="Esqueceu seu email?"
-        android:textSize="18sp"
-        android:textColor="@color/blue"
-        android:textStyle="bold"
-        android:clickable="true"
-        android:focusable="true"
-        app:layout_constraintTop_toBottomOf="@+id/loginPassword"
-        app:layout_constraintStart_toStartOf="@+id/loginPassword"
-        app:layout_constraintEnd_toEndOf="@+id/loginPassword"
-        app:layout_constraintHorizontal_bias="0.5" />
 
     <Button
         android:id="@+id/btnLogin"
@@ -106,7 +91,7 @@
         android:textSize="18sp"
         android:textStyle="bold"
         android:textColor="@color/white"
-        app:layout_constraintTop_toBottomOf="@+id/txtForgotPassword"
+        app:layout_constraintTop_toBottomOf="@+id/loginPassword"
         app:layout_constraintStart_toStartOf="@+id/containerLogin"
         app:layout_constraintEnd_toEndOf="@+id/containerLogin"
         app:layout_constraintHorizontal_bias="0.5" />

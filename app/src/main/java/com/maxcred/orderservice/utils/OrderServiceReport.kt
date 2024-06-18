@@ -25,9 +25,11 @@ class OrderServiceReport(
         val quantidade: Int,
         val codigo: String,
         val descricao: String,
-        val custo: String?,
-        val custoTotal: String?
-    )
+        val custo: String?
+    ) {
+        val custoTotal: Double
+            get() = (quantidade * (custo?.toDoubleOrNull() ?: 0.0))
+    }
 
     private fun convertDrawableToBase64(context: Context, drawableId: Int): String {
         val inputStream: InputStream = context.resources.openRawResource(drawableId)
@@ -50,117 +52,128 @@ class OrderServiceReport(
 
         val pecasHtml = if (pecasUtilizadas.isNotEmpty()) {
             pecasUtilizadas.joinToString(separator = "") { peca ->
-                totalOrderCost += parseDouble(peca.custoTotal) ?: 0.0
+                totalOrderCost += peca.custoTotal
                 """
-                <tr>
-                    <td>${peca.quantidade}</td>
-                    <td>${peca.codigo}</td>
-                    <td>${peca.descricao}</td>
-                    <td>${formatCurrency(parseDouble(peca.custo))}</td>
-                    <td>${formatCurrency(parseDouble(peca.custoTotal))}</td>
-                </tr>
-                """
+            <tr>
+                <td>${peca.quantidade}</td>
+                <td>${peca.codigo}</td>
+                <td>${peca.descricao}</td>
+                <td>${formatCurrency(parseDouble(peca.custo))}</td>
+                <td>${formatCurrency(peca.custoTotal)}</td>
+            </tr>
+            """
             }
         } else {
             // Caso não haja peças utilizadas, preencha a tabela com 6 linhas vazias
             """
-            <tr><td></td><td></td><td></td><td></td><td></td></tr>
-            <tr><td></td><td></td><td></td><td></td><td></td></tr>
-            <tr><td></td><td></td><td></td><td></td><td></td></tr>
-            <tr><td></td><td></td><td></td><td></td><td></td></tr>
-            <tr><td></td><td></td><td></td><td></td><td></td></tr>
-            <tr><td></td><td></td><td></td><td></td><td></td></tr>
-            """
+        <tr><td></td><td></td><td></td><td></td><td></td></tr>
+        <tr><td></td><td></td><td></td><td></td><td></td></tr>
+        <tr><td></td><td></td><td></td><td></td><td></td></tr>
+        <tr><td></td><td></td><td></td><td></td><td></td></tr>
+        <tr><td></td><td></td><td></td><td></td><td></td></tr>
+        <tr><td></td><td></td><td></td><td></td><td></td></tr>
+        """
         }
 
         val descricaoServicoHtml = """
-            <div class="description">
-                <ul>
-                    ${descricaoServico.split("\n").joinToString(separator = "") { "<li>$it</li>" }}
-                </ul>
-            </div>
-        """
+        <div class="description">
+            <ul>
+                ${descricaoServico.split("\n").joinToString(separator = "") { "<li>$it</li>" }}
+            </ul>
+        </div>
+    """
 
         val totalOrderCostHtml = if (totalOrderCost > 0) {
             """
-            <tr>
-                <td colspan="4" style="text-align: right;"><strong>Total da Ordem:</strong></td>
-                <td>${formatCurrency(totalOrderCost)}</td>
-            </tr>
-            """
+        <tr>
+            <td colspan="4" style="text-align: right;"><strong>Total da Ordem:</strong></td>
+            <td>${formatCurrency(totalOrderCost)}</td>
+        </tr>
+        """
         } else {
             ""
         }
 
-        return  """
-    <!DOCTYPE html>
-    <html>
-    <head>
-        <meta charset="UTF-8">
-        <title>ORDEM DE SERVIÇO - OURO NEGRO</title>
-        <style>
-            body {
-                font-family: Arial, sans-serif;
-                margin: 20px;
-            }
-            .container {
-                margin-bottom: 20px;
-            }
-            .header {
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                margin-bottom: 20px;
-            }
-            .header img {
-                max-height: 80px;
-                margin-right: 40px;
-            }
-            .header h1 {
-                font-size: 24px;
-                margin: 0;
-            }
-            .info-table, .parts-table, .signatures-table {
-                width: 100%;
-                border-collapse: collapse;
-                margin-bottom: 20px;
-            }
-            .info-table th, .info-table td, .parts-table th, .parts-table td, .signatures-table th, .signatures-table td {
-                border: 1px solid #000;
-                padding: 8px;
-                text-align: center;
-            }
-            .info-table th {
-                background-color: #f2f2f2;
-            }
-            .parts-table th {
-                background-color: #e0e0e0;
-            }
-            .signatures-table th {
-                background-color: #f2f2f2;
-            }
-            .section-title {
-                text-align: center;
-                font-size: 18px;
-                font-weight: bold;
-                border-top: 1px solid #000;
-                border-left: 1px solid #000;
-                border-right: 1px solid #000;
-                border-bottom: none;
-                padding: 8px;
-            }
-            .description {
-                border: 1px solid #000;
-                padding: 8px;
-                min-height: 100px;
-            }
-            .description ul {
-                list-style-type: circle;
-                padding-left: 20px;
-            }
-        </style>
-    </head>
-    <body>
+        return """
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>ORDEM DE SERVIÇO - OURO NEGRO</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        .container {
+            margin-bottom: 5px;
+        }
+        .header {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 5px;
+        }
+        .header img {
+            max-height: 80px;
+            margin-right: 40px;
+        }
+        .header h1 {
+            font-size: 24px;
+            margin: 0;
+        }
+        .info-table, .parts-table, .signatures-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 5px;
+        }
+        .info-table th, .info-table td, .parts-table th, .parts-table td, .signatures-table th, .signatures-table td {
+            border: 1px solid #000;
+            padding: 8px;
+            text-align: center;
+        }
+        .info-table th {
+            background-color: #f2f2f2;
+        }
+        .parts-table th {
+            background-color: #e0e0e0;
+        }
+        .signatures-table th {
+            background-color: #f2f2f2;
+        }
+        .section-title {
+            text-align: center;
+            font-size: 18px;
+            font-weight: bold;
+            border-top: 1px solid #000;
+            border-left: 1px solid #000;
+            border-right: 1px solid #000;
+            border-bottom: none;
+            padding: 8px;
+        }
+        .description {
+            border: 1px solid #000;
+            padding: 8px;
+            min-height: 100px;
+        }
+        .description ul {
+            list-style-type: circle;
+            padding-left: 20px;
+        }
+        .container-header {
+            width: 100%;
+            text-align: center;
+            margin-bottom: 5px;
+        }
+        .title-setor {
+            margin-bottom: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container-header">
+        <h2 class="title-setor">SETOR DE CACHOEIRAS DE MACACU - RJ</h2>
+    </div>
     <div class="header">
         <img src="data:image/jpeg;base64,$logoBase64" alt="Logo"/>
         <h1>Ordem de Serviço Nº ${orderNumber}</h1>
@@ -211,8 +224,9 @@ class OrderServiceReport(
             <td>$encarregado</td>
         </tr>
     </table>
-    </body>
-    </html>
-    """
+</body>
+</html>
+"""
     }
+
 }

@@ -93,7 +93,6 @@ class ServiceOrderListAdapter(
                             codigo = it.partCode ?: "",
                             descricao = it.partDescription ?: "",
                             custo = (it.partCost),
-                            custoTotal = it.totalPartCostValue,
                         )
                     }
 

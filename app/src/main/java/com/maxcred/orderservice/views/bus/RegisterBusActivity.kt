@@ -33,7 +33,7 @@ class RegisterBusActivity : AppCompatActivity() {
 
 
         // Define the options for the dropdown
-        val vehicleTypes = arrayOf("Rodoviario", "Urbano", "MicroOnibus")
+        val vehicleTypes = arrayOf("Rodoviário", "Urbano", "Micro-ônibus")
 
         // Create an ArrayAdapter using the string array and a default dropdown layout
         val adapter = ArrayAdapter(this, android.R.layout.simple_dropdown_item_1line, vehicleTypes)

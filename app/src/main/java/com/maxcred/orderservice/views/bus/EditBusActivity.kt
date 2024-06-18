@@ -57,7 +57,7 @@ class EditBusActivity : AppCompatActivity() {
             edtNumberCar.setText(busEntity.numberCar)
 
             // Obtenha a lista de tipos de veículos
-            val vehicleTypes = arrayOf("Rodoviario", "Urbano", "MicroOnibus") // Substitua isso pela sua lógica para obter os tipos de veículos do banco de dados
+            val vehicleTypes = arrayOf("Rodoviário", "Urbano", "Micro-ônibus") // Substitua isso pela sua lógica para obter os tipos de veículos do banco de dados
 
             // Crie um adapter com a lista de tipos de veículos
             val adapter = ArrayAdapter(this@EditBusActivity, android.R.layout.simple_dropdown_item_1line, vehicleTypes)
